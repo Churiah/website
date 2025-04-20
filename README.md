@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite = githubPages
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -65,3 +65,14 @@ export default tseslint.config({
 - Component: Sử dụng PascalCase. Ví dụ: UserProfile.jsx.
 - Hooks: Bắt đầu với use và sử dụng camelCase. Ví dụ: useAuth.js.
 - Styles: Nếu sử dụng CSS module, đặt tên theo dạng Component.module.css.
+
+## Using react-router-dom
+Question: https://stackoverflow.com/questions/75967389/react-router-dom-wont-work-when-i-deploy-with-gh-pages
+
+GitHub Pages is built for static sites. Every HTML, CSS, JS, image, etc. file is supposed to be an actual file. The problem is that React apps like yours are single-page applications, in the sense that there is only one HTML file and all routing is done with JavaScript. The development server (and some deployment servers, if you go with a paid service or a different free service) maps every unknown page back to the index.html file (with create-react-app, that's in the ./public directory). GitHub pages doesn't do that, if you request yourwebsite.github.io/apple/banana, it will look for an index.html file in a directory called ./apple/banana, which doesn't exist. In the dev server, it will return the main index.html file from the public directory and then your React app handles displaying that page.
+
+The HashRouter gets around that by using the hash of the URL. You've probably already seen this with URLs such as https://en.wikipedia.org/wiki/React_(software)#Notable_features. Everything after the hash (#) is not sent in the request to the server, but rather handled by the browser. The default behavior is to scroll down to an element with that id (in this case, scroll down to the "Notable features" section which has the id of Notable_features). This means that if you sent a request to your GH Pages site like yourwebsite.github.io/#/apple/banana, the actual request for HTML is yourwebsite.github.io/, which will properly get your React app. Then, react-router-dom will use the information in the hash of the URL to display a "page" even though it's not a page in the traditional sense.
+
+If you want to use React router on GitHub pages, then you either need to use a HashRouter or a MemoryRouter, but notice that the memory router will not have shareable links as it stores what page you're on in memory (using a JavaScript object). For more details you can look at React Router's page on Picking a Router.
+
+TLDR: Use HashRouter
