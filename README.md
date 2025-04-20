@@ -52,3 +52,16 @@ export default tseslint.config({
   },
 })
 ```
+## Projects structure
+- assets/: Lưu trữ các tệp tĩnh như hình ảnh, font chữ.
+- components/: Chứa các component dùng chung trong toàn ứng dụng.
+- features/: Mỗi tính năng của ứng dụng được tổ chức thành một module riêng, giúp dễ dàng quản lý và mở rộng. Ví dụ, tính năng "User" có thể có thư mục riêng với các component, hooks, services liên quan.
+- hooks/: Chứa các custom hooks dùng chung trong ứng dụng.
+- contexts/: Lưu trữ các context cho việc quản lý state toàn cục.
+- services/: Chứa các hàm gọi API và xử lý dữ liệu từ server.
+- utils/: Các hàm tiện ích chung như format date, xử lý chuỗi.
+
+## Naming convention
+- Component: Sử dụng PascalCase. Ví dụ: UserProfile.jsx.
+- Hooks: Bắt đầu với use và sử dụng camelCase. Ví dụ: useAuth.js.
+- Styles: Nếu sử dụng CSS module, đặt tên theo dạng Component.module.css.
