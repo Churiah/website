@@ -10,6 +10,7 @@ const router = createHashRouter([
   {
     path: '/',
     element: <Home />,
+    errorElement: <div>404 Not Found</div>,
   },
   {
     path: '/about',
